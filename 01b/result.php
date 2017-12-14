@@ -1,6 +1,6 @@
 <?php
 
-require_once('worker.php') ;require_once('worker.php') ;
+require_once('worker.php') ;
 
 define('DEBUG',false) ;
 
