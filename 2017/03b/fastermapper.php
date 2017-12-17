@@ -23,8 +23,6 @@ class Mapper {
   public function getOutput() {
   
     $this->drawMap() ;
-    $this->result = abs($this->currentx) + abs($this->currenty) ;
-    if (DEBUG) echo "x=", abs($this->currentx), "  y=", abs($this->currenty), "\n" ;
     return($this->result) ;
   
   }
@@ -44,7 +42,7 @@ class Mapper {
     // else if (There is something to my west and nothing to my north) go north.
     // else go east.
     
-    for ($i=2; $i<=$this->int; $i++) {
+    do {
     
       // There is something to my west and nothing to my north
       if (array_key_exists($this->currentx-1,$this->map) AND array_key_exists($this->currenty,$this->map[$this->currentx-1]) AND !( array_key_exists($this->currentx,$this->map) AND array_key_exists($this->currenty+1, $this->map[$this->currentx]) )) {
@@ -62,14 +60,45 @@ class Mapper {
         // place the next square to my east
         $this->currentx++ ;
       }
-      
-      if (DEBUG) echo "X is ", $this->currentx, "   Y is ", $this->currenty, "    I is $i\n" ;
-      
-      if ($i % 1000 === 0) echo "At $i\n" ;
+    
+      $this->populateSquare() ;
+    
+      if (DEBUG) var_dump($this->map) ;
+    
+    } while ($this->map[$this->currentx][$this->currenty] <= $this->int) ;
+  
+  }
+  
+  private function populateSquare() {
+  
+    $this->result = 0 ;
+    // I want all the "minesweeper neighhours" of the current square
+    if ($this->currentx === 0 and $this->currenty === 0 ) {
+      // don't even think about doing anything
+    } else {
+        for ($x = $this->currentx-1; $x <= $this->currentx+1; $x++) {
+        if (DEBUG) echo "entered outer for loop\n" ;
+        if (array_key_exists($x, $this->map)) {
+        
+            for ($y = $this->currenty-1; $y <= $this->currenty+1; $y++) {
+            if (DEBUG) echo "entered inner for loop\n" ;
+            if (array_key_exists($y, $this->map[$x])) {
+                
+                $this->result += $this->map[$x][$y] ;
+                if (DEBUG) echo $this->result, "\n" ;
+            }
+            
+            }
+            
+        }
+        
+        }
+            
+        $this->map[$this->currentx][$this->currenty] = $this->result ;
+        if (DEBUG) echo $this->result, "\n" ;
+    
     }
-    
-    if (DEBUG) var_dump($this->map) ;
-    
+  
   }
   
   
