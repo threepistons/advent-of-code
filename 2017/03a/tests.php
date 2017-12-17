@@ -1,14 +1,14 @@
 <?php
 
-    define('DEBUG', true) ;
+    define('DEBUG', false) ;
 
-    require_once('mapper.php') ;
+    require_once('fastermapper.php') ;
 
     $tests = array (
         array ('input' => 1, 'output' => 0),
         array ('input' => 12, 'output' => 3),
         array ('input' => 23, 'output' => 2),
-        array ('input' => 1024, 'output' => 31)
+    //    array ('input' => 1024, 'output' => 31)
     ) ;
     
     try {

@@ -20,6 +20,9 @@ class Mapper {
   
   public function getOutput() {
   
+    $this->drawMap() ;
+    $this->result = abs($this->map[$this->int]['x']) + abs ($this->map[$this->int]['y']) ;
+    if (DEBUG) echo "x=", abs($this->map[$this->int]['x']), "  y=", abs($this->map[$this->int]['y']), "\n" ;
     return($this->result) ;
   
   }
@@ -30,19 +33,24 @@ class Mapper {
     // The access port
     $this->map[1] = array ('x' => 0, 'y' => 0) ;
     
+    // if (There is something to my south and nothing to my west) go west.
+    // else if (There is something to my east and nothing to my south) go south.
+    // else if (There is something to my west and nothing to my north) go north.
+    // else go east.
+    
     for ($i=1; $i<=$this->int; $i++) {
-      // (the previous square is to my west AND the square to my north is clear) OR (the previous square is to my south AND the square to my west is occupied)
-      if () {
+      // There is something to my west and nothing to my north
+      if (!(in_array(array('x' => $this->map[$i]['x'],'y' => $this->map[$i]['y']+1), $this->map)) AND in_array(array('x' => $this->map[$i]['x']-1,'y' => $this->map[$i]['y']),$this->map)) {
         // place the next square to my north
         $this->map[$i+1]['x'] = $this->map[$i]['x'] ;
         $this->map[$i+1]['y'] = $this->map[$i]['y']+1 ;
-      // (the previous square is to my south AND the square to my west is clear) OR (the previous square is to my east AND the square to my south is occupied)
-      } else if () {
+      // There is something to my south and nothing to my west
+      } else if (!(in_array(array('x' => $this->map[$i]['x']-1,'y' => $this->map[$i]['y']), $this->map)) AND in_array(array('x' => $this->map[$i]['x'],'y' => $this->map[$i]['y']-1),$this->map)) {
         // place the next square to my west
         $this->map[$i+1]['x'] = $this->map[$i]['x']-1 ;
         $this->map[$i+1]['y'] = $this->map[$i]['y'] ;
-      // (the previous square is to my east AND the square to my south is clear) OR (the previous square is to my north AND the square to my east is occupied)
-      } else if () {
+      // There is something to my east and nothing to my south
+      } else if (!(in_array(array('x' => $this->map[$i]['x'],'y' => $this->map[$i]['y']-1), $this->map)) AND in_array(array('x' => $this->map[$i]['x']+1,'y' => $this->map[$i]['y']),$this->map)) {
         // place the next square to my south
         $this->map[$i+1]['x'] = $this->map[$i]['x'] ;
         $this->map[$i+1]['y'] = $this->map[$i]['y']-1 ;
@@ -51,9 +59,10 @@ class Mapper {
         $this->map[$i+1]['x'] = $this->map[$i]['x']+1 ;
         $this->map[$i+1]['y'] = $this->map[$i]['y'] ;
       }
+      if ($i % 1000 === 0) echo "At $i\n" ;
     }
     
-    if (DEBUG) var_dump($map) ;
+    if (DEBUG) var_dump($this->map) ;
     
   }
   
