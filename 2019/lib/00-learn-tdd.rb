@@ -28,8 +28,6 @@ class Trombone
   def slide(position)
     reallength = @firstlength * (2.0 ** ((position - 1.0) / 12.0))
     @length = reallength.to_i
-    puts position
-    puts @length
   end
 
 end
