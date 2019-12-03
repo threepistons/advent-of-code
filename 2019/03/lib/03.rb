@@ -24,6 +24,28 @@ class Circuit
     @result = distances.min
   end
 
+  # conveniently, the array keys in wires[0] and wires[1] tell us how many steps along the wire we are.
+  def shortest(circuit)
+    wires = []
+    trace = []
+    IO.foreach(circuit) do |line|
+      wire = wirepath(line)
+      #puts wire.empty?
+      #puts wire
+      wires.push(wire)
+      #puts wires
+    end
+    crossings = wires[0] & wires[1]
+    crossings.delete([0,0]) # remove origin
+    #puts crossings
+    crossings.each do |crossing|
+      lega = wires[0].index(crossing)
+      legb = wires[1].index(crossing)
+      trace.push(lega + legb)
+    end
+    @result = trace.min
+  end
+
   def taxipaths(crossings)
     distances = []
     crossings.each do |crossing|
@@ -81,4 +103,7 @@ end
 
 circuit = Circuit.new
 circuit.nearest('input.txt')
+puts circuit.result
+
+circuit.shortest('input.txt')
 puts circuit.result

@@ -11,6 +11,12 @@ RSpec.describe Circuit, "#taxidistance" do
       expect(ic.result).to eq 159
       ic.nearest('135.txt')
       expect(ic.result).to eq 135
+      ic.shortest('6.txt')
+      expect(ic.result).to eq 30
+      ic.shortest('159.txt')
+      expect(ic.result).to eq 610
+      ic.shortest('135.txt')
+      expect(ic.result).to eq 410
     end
   end
 end
