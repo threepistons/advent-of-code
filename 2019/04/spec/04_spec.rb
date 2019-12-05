@@ -62,4 +62,34 @@ RSpec.describe RudolphTheRipper do
       expect(r.count).to eq 17
     end
   end
+  context '"nastiertest" method' do
+    it 'tests with 000000' do
+      r.nastiertest('000000')
+      expect(r.result).to eq false
+    end
+  end
+  context '"nastiertest" method' do
+    it 'tests with 000110' do
+      r.nastiertest('000110')
+      expect(r.result).to eq false
+    end
+  end
+  context '"nastiertest" method' do
+    it 'tests with 123456' do
+      r.nastiertest('123456')
+      expect(r.result).to eq false
+    end
+  end
+  context '"nastiertest" method' do
+    it 'tests with 123455' do
+      r.nastiertest('123455')
+      expect(r.result).to eq true
+    end
+  end
+  context '"nastiertest" method' do
+    it 'tests with 123445' do
+      r.nastiertest('123445')
+      expect(r.result).to eq true
+    end
+  end
 end
