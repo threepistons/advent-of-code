@@ -111,6 +111,32 @@ class Intcode
       when 4
         @output = thearray.at(c).to_s
         i+=2
+      when 5
+        if thearray[c] != 0
+          i = thearray.at(b)
+        else
+          i+=3
+        end
+      when 6
+        if thearray[c] == 0
+          i = thearray.at(b)
+        else
+          i+=3
+        end
+      when 7
+        if thearray.at(c) < thearray.at(b)
+          thearray[a] = 1
+        else
+          thearray[a] = 0
+        end
+        i+=4
+      when 8
+        if thearray.at(c) == thearray.at(b)
+          thearray[a] = 1
+        else
+          thearray[a] = 0
+        end
+        i+=4
       when 99
         break
       default
@@ -144,7 +170,7 @@ end
 
 computer = Intcode.new
 IO.foreach('input.txt') do |line|
-  computer.input = 1
+  computer.input = 5
   computer.loopcalculate(line)
   if computer.result != '0'
     puts 'ERROR:', computer.result
