@@ -101,4 +101,3 @@ IO.foreach('input.txt') do |line|
   puts @result
   computer.bruteforce(line)
 end
-3
