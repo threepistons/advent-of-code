@@ -13,6 +13,7 @@ class DepthIncreases
     @total
   end
   def calculate(filename)
+    # This returned an answer that was $solution-1 for the real data but correct for the test data. I remain unsure as to why.
     @total = 0
     depths = File.readlines(filename)
     puts 'There are ' + depths.length.to_s + ' array items.'
