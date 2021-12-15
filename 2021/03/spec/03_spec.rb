@@ -8,10 +8,10 @@ RSpec.describe Power, '#power' do
       expect(power.gamma).to eq 22
       expect(power.epsilon).to eq 9
       expect(power.product).to eq 198
-      #traj.parttwo
-      #expect(traj.length).to eq 15
-      #expect(traj.depth).to eq 60
-      #expect(traj.product).to eq 900
+      power.parttwo
+      expect(power.o2).to eq 23
+      expect(power.co2).to eq 10
+      expect(power.life).to eq 230
     end
   end
 end

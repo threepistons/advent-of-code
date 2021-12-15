@@ -2,6 +2,9 @@ class Power
   attr_reader :gamma
   attr_reader :epsilon
   attr_reader :product
+  attr_reader :o2
+  attr_reader :co2
+  attr_reader :life
   def initialize(filename)
     @file = File.new(filename)
   end
@@ -26,5 +29,10 @@ class Power
     @gamma = rawgamma.to_i(2)
     @epsilon = rawepsilon.to_i(2)
     @product = @gamma * @epsilon
+  end
+  def parttwo
+    @o2
+    @co2
+    @life
   end
 end
