@@ -2,9 +2,13 @@
 
 import re
 import string
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--run", action="store_true")
+args = parser.parse_args()
 
 def test_answer():
-    assert cubecounter('../02-1/test.txt') == 2286
+    assert cubecounter('test.txt') == 2286
 
 def cubecounter(document):
     pows = 0
@@ -43,6 +47,6 @@ def cubecounter(document):
         pows += max(reds) * max(greens) * max(blues)
     return(pows)
 
-result = cubecounter('../02-1/input.txt')
-
-print(result)
+if args.run:
+    result = cubecounter('input.txt')
+    print(result)

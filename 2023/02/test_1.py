@@ -2,6 +2,10 @@
 
 import re
 import string
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--run", action="store_true")
+args = parser.parse_args()
 
 def test_answer():
     assert cubecounter('test.txt') == 8
@@ -38,6 +42,6 @@ def cubecounter(document):
             sum += gameid
     return(sum)
 
-result = cubecounter('input.txt')
-
-print(result)
+if args.run:
+    result = cubecounter('input.txt')
+    print(result)

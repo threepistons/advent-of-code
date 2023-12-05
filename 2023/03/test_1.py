@@ -2,6 +2,10 @@
 
 import string
 import re
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--run", action="store_true")
+args = parser.parse_args()
 
 def test_answer():
     assert partnumber('test.txt') == 4361
@@ -43,8 +47,7 @@ def partnumber(doc):
     endresult = 0
     for result in resultsmap:
         endresult += int(result[2])
-    return(endresult)
+    return(endresult)    
 
-print(partnumber('input.txt'))
-    
-    
+if args.run:
+    print(partnumber('input.txt'))

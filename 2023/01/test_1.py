@@ -2,6 +2,10 @@
 
 import re
 import string
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--run", action="store_true")
+args = parser.parse_args()
 
 def calibrationcleaner(document):
     with open(document) as d:
@@ -20,7 +24,8 @@ def calibrationcleaner(document):
     return(calibration)
 
 def test_answer():
-    assert calibrationcleaner('test.txt') == 142
+    assert calibrationcleaner('test1.txt') == 142
 
-result = calibrationcleaner('input.txt')
-print(result)
+if args.run:
+    result = calibrationcleaner('input.txt')
+    print(result)

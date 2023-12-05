@@ -2,6 +2,10 @@
 
 import re
 import string
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--run", action="store_true")
+args = parser.parse_args()
 
 def calibrationcleaner(document):
     with open(document) as d:
@@ -49,11 +53,10 @@ def enumerator(thing):
         # This is how you write "default" in Python. Also this is going to be a digit
         case _:
             return(thing)
-    
-        
 
 def test_answer():
-    assert calibrationcleaner('test.txt') == 542
+    assert calibrationcleaner('test2.txt') == 542
 
-result = calibrationcleaner('../01-1/input.txt')
-print(result)
+if args.run:
+    result = calibrationcleaner('input.txt')
+    print(result)
